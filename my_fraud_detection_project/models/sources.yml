@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: fraud_detection
+    database: "{{ target.database }}"
+    schema: FRAUD_DETECTION
+    tables:
+      - name: transactions_staging
+        identifier: TRANSACTIONS_STAGING
+        description: "Raw banking transaction data loaded from AWS S3 into Snowflake staging table"
+        columns:
+          - name: TransactionID
+            tests:
+              - not_null
+          - name: UserID
+            tests:
+              - not_null
+          - name: TransactionAmount
+            tests:
+              - not_null
+          - name: TransactionDate
+            tests:
+              - not_null
+          - name: IsFraud
+            tests:
+              - accepted_values:
+                  values: [0, 1]
+          - name: SuspiciousFlag
+            tests:
+              - accepted_values:
+                  values: [0, 1]

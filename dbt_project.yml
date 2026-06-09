@@ -1,0 +1,57 @@
+
+
+# dbt_project.yml
+
+name: 'my_fraud_detection_project'  
+version: '1.0.0'
+profile: 'my_fraud_detection_project'  # This refers to the profile name in my profiles.yml
+
+# The directory where dbt will look for models
+model-paths: ['my_fraud_detection_project/models']
+
+models:
+  my_fraud_detection_project:  # The name of my project must match the 'name' above
+  
+    bronze:
+      +materialized: view  # One can change this to 'table' if you'd prefer tables
+      br_fraud_detection_raw_data_historical:
+        +materialized: table  
+
+    silver:
+      +materialized: view
+      si_transactions_fact:
+        +materialized: table
+      si_users_dimension:
+        +materialized: view
+      si_devices_dimension:
+        +materialized: view
+
+    gold:
+      +materialized: view
+      go_user_behavior_metrics:
+        +materialized: view
+      go_merchant_risk_assessment:
+        +materialized: view
+      go_real_time_fraud_detection:
+        +materialized: view
+      go_predictive_model_features:
+        +materialized: view
+      go_fraud_detection_dashboard_metrics:
+        +materialized: view
+
+
+# Specify the folder where dbt should write test and documentation files (optional)
+target-path: "target"
+
+
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+# Path to compiled models (optional)
+clean-targets:
+  - "target"
+  - "dbt_modules"
+
+

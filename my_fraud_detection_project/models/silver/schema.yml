@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: si_transactions_fact
+    description: "Core banking transaction fact table"
+    columns:
+      - name: TransactionID
+        tests:
+          - unique
+          - not_null
+      - name: UserID
+        tests:
+          - not_null
+      - name: MerchantID
+        tests:
+          - not_null
+      - name: IsFraud
+        tests:
+          - accepted_values:
+              values: [0, 1]
+
+  - name: si_users_dimension
+    description: "User dimension table for fraud analytics"
+    columns:
+      - name: UserID
+        tests:
+          - unique
+          - not_null
+
+  - name: si_devices_dimension
+    description: "Device dimension table for fraud analytics"
+    columns:
+      - name: DeviceID
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: go_fraud_detection_dashboard_metrics
+    description: "Aggregated KPI table for fraud detection dashboard"
+    columns:
+      - name: total_transactions
+        tests:
+          - not_null
+      - name: total_fraud_transactions
+        tests:
+          - not_null
+      - name: fraud_rate_pct
+        tests:
+          - not_null
+
+  - name: go_user_behavior_metrics
+    description: "Aggregated user behavior and fraud risk metrics"
+    columns:
+      - name: UserID
+        tests:
+          - unique
+          - not_null
+      - name: total_transactions
+        tests:
+          - not_null
+      - name: total_fraud_transactions
+        tests:
+          - not_null
+
+  - name: go_merchant_risk_assessment
+    description: "Merchant-level fraud and risk metrics"
+    columns:
+      - name: MerchantID
+        tests:
+          - unique
+          - not_null
+      - name: merchant_risk_level
+        tests:
+          - accepted_values:
+              values: ['HIGH_RISK', 'MEDIUM_RISK', 'LOW_RISK']
+
+  - name: go_real_time_fraud_detection
+    description: "High-risk transaction monitoring view"
+    columns:
+      - name: TransactionID
+        tests:
+          - not_null
+      - name: AnomalyScore
+        tests:
+          - not_null
+      - name: risk_level
+        tests:
+          - accepted_values:
+              values: ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']
