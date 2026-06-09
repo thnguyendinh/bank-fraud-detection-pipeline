@@ -1,31 +1,13 @@
-# --------------------
-# dbt
-# --------------------
-dbt_packages/
-target/
-logs/
-.dbt/
-.dbt/profiles.yml
-
-# --------------------
-# Python
-# --------------------
 dbt-env/
 venv/
 .env
+profiles.yml
+target/
+dbt_packages/
+logs/
+*.csv
+*.parquet
+*.xlsx
+.streamlit/secrets.toml
+dashboard/.streamlit/secrets.toml
 __pycache__/
-*.pyc
-*.pyo
-
-# --------------------
-# IDEs
-# --------------------
-.vscode/
-.idea/
-*.code-workspace
-
-# --------------------
-# OS
-# --------------------
-.DS_Store
-Thumbs.db
